@@ -11,18 +11,38 @@ import android.support.v7.app.AppCompatActivity;
 
 public class about extends AppCompatActivity {
 
-private Button button;
+ private Spinner spinner;
+    private static final String[]path = {"1", "2", "3"};
 
     @Override
-    protected void onCreate( Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
-        button=(TextView)findViewById(R.id.btn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               //Add your operation here.......
-            }
-        });
+
+        spinner = (Spinner)findViewById(R.id.spinner);
+        ArrayAdapter<String>adapter = new ArrayAdapter<String>(about.this,
+                android.R.layout.simple_spinner_item,path);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+
     }
+
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+
+        switch (position) {
+            case 0:
+               Toast.makeText(about.this, "one", Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                Toast.makeText(about.this, "two", Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Toast.makeText(about.this, "three", Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+    }
+
 }
